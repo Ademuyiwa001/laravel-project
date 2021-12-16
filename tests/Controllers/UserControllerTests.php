@@ -6,9 +6,16 @@
 
 
     class UserController extends TestCase{
-        public function testIndexReturnsDataInValidFormat() {
-    
-            $this->json('get', 'api/user')
+        public function testRegister() {
+
+            $payload = [
+                'firstName' => $this->faker->firstName,
+                'middleName' => $this->faker->middleName,
+                'lastName' => $this->faker->lastName,
+                'email' => $this->faker->email,
+            ];
+
+            $this->json('get', 'api/auth/register', $payload)
                  ->assertStatus(Response::HTTP_OK)
                  ->assertJsonStructure(
                      [
@@ -24,6 +31,7 @@
                      ]
                  );
         }
+
     }
 
 ?>
